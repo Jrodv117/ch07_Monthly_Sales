@@ -12,7 +12,7 @@ def command_menu():
 
 
 def open_read_csv():
-    with open("monthly_sales.csv", "r") as data_file:
+    with open("monthly_sales.csv") as data_file:
         data = csv.reader(data_file)
         sales = []
         for row in data:
