@@ -1,5 +1,4 @@
 import csv
-from inspect import Traceback
 
 
 def command_menu():
@@ -15,9 +14,9 @@ def command_menu():
 def open_read_csv():
     try:
         with open("monthly_sales.csv") as data_file:
-            data = csv.reader(data_file)
+            DATA = csv.reader(data_file)
             sales = []
-            for row in data:
+            for row in DATA:
                 sales.append([row[0], row[1]])
             return sales
     except:
