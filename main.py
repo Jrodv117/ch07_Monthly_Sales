@@ -1,4 +1,5 @@
 import csv
+from inspect import Traceback
 
 
 def command_menu():
@@ -12,12 +13,16 @@ def command_menu():
 
 
 def open_read_csv():
-    with open("monthly_sales.csv") as data_file:
-        data = csv.reader(data_file)
-        sales = []
-        for row in data:
-            sales.append([row[0], int(row[1])])
-        return sales
+    try:
+        with open("monthly_sales.csv") as data_file:
+            data = csv.reader(data_file)
+            sales = []
+            for row in data:
+                sales.append([row[0], int(row[1])])
+            return sales
+    except:
+        print("ERROR CSV FILE NOT FOUND OR COULDN'T BE READ")
+        exit()
 
 
 def save_to_csv(monthly_sales_list):
