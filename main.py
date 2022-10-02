@@ -18,7 +18,7 @@ def open_read_csv():
             data = csv.reader(data_file)
             sales = []
             for row in data:
-                sales.append([row[0], int(row[1])])
+                sales.append([row[0], row[1]])
             return sales
     except:
         print("ERROR CSV FILE NOT FOUND OR COULDN'T BE READ")
@@ -29,7 +29,10 @@ def save_to_csv(monthly_sales_list):
     with open("monthly_sales.csv", "w") as data_file:
         writer = csv.writer(data_file)
         for row in monthly_sales_list:
-            writer.writerow([row[0], int(row[1])])
+            try:
+                writer.writerow([row[0], int(row[1])])
+            except:
+                writer.writerow([row[0], row[1]])
 
 
 def monthly(monthly_sales_list):
@@ -42,7 +45,11 @@ def monthly(monthly_sales_list):
 def yearly(monthly_sales_list):
     total_sales = 0
     for row in monthly_sales_list:
-        total_sales += row[1]
+        try:
+            total_sales += int(row[1])
+        except:
+            total_sales += 0
+            print(f"Using sales amount of 0 for {row[0]}")
     average = total_sales / len(monthly_sales_list)
     print(f"Yearly total: {total_sales}")
     print(f"Monthly Average: {round(average,2)}\n")
@@ -68,7 +75,7 @@ def edit(monthly_sales_list):
         print("Invalid three-letter month.\n")
     else:
         index_of_month = months.index(month)
-        sales_for_month = int(input("Sales Amount: "))
+        sales_for_month = input("Sales Amount: ")
         monthly_sales_list[index_of_month][1] = sales_for_month
         save_to_csv(monthly_sales_list)
         print(f"Sales amount for {month} was modified.\n")
