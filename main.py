@@ -49,7 +49,7 @@ def yearly(monthly_sales_list):
             total_sales += int(row[1])
         except:
             total_sales += 0
-            print(f"Using sales amount of 0 for {row[0]}")
+            print(f"Using sales amount of 0 for {row[0]}.")
     average = total_sales / len(monthly_sales_list)
     print(f"Yearly total: {total_sales}")
     print(f"Monthly Average: {round(average,2)}\n")
